@@ -13,8 +13,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "baseUrl": "./",
+    "paths": {
+        "@pages/*": ["pages/*"],
+        "@styles/*": ["styles/*"],
+        "@components/*": ["components/*"],
+        "@hooks/*": ["hooks/*"],
+        "@images/*": ["public/assets/*"]
+    },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/RegularList.jsx"],
   "exclude": ["node_modules"]
 }

@@ -1,86 +1,62 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import { LargePersonListItem, LargeProductListItem, NumberedList, RegularList, SmallPersonListItem } from "@components/index"
 
 const Home: NextPage = () => {
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    const people = [{
+        name: 'John Doe',
+        age: 54,
+        hairColor: 'brown',
+        hobbies: ['swimming', 'bicycling', 'video games'],
+    }, {
+        name: 'Brenda Smith',
+        age: 33,
+        hairColor: 'black',
+        hobbies: ['golf', 'mathematics'],
+    }, {
+        name: 'Jane Garcia',
+        age: 27,
+        hairColor: 'blonde',
+        hobbies: ['biology', 'medicine', 'gymnastics'],
+    }];
+    
+    const products = [{
+        name: 'Flat-Screen TV',
+        price: '$300',
+        description: 'Huge LCD screen, a great deal',
+        rating: 4.5,
+    }, {
+        name: 'Basketball',
+        price: '$10',
+        description: 'Just like the pros use',
+        rating: 3.8,
+    }, {
+        name: 'Running Shoes',
+        price: '$120',
+        description: 'State-of-the-art technology for optimum running',
+        rating: 4.2,
+    }];
+    
+    return (
+        <>
+            <RegularList
+                items={people}
+                itemResourceName={"person"}
+                itemComponent={SmallPersonListItem}
+                />
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+            <RegularList
+                items={people}
+                itemResourceName={"person"}
+                itemComponent={LargePersonListItem}
+            />
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
-    </div>
-  )
+            <NumberedList
+                items={products}
+                itemResourceName={"product"}
+                itemComponent={LargeProductListItem}
+            />
+        </>
+    )
 }
 
 export default Home
