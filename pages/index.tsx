@@ -1,9 +1,12 @@
 import type { NextPage } from 'next'
-import { LargePersonListItem, LargeProductListItem, Modal, NumberedList, RegularList, SmallPersonListItem, SplitScreen } from "@components/index"
+import { CurrentUserLoading, UserInfo } from "@components/index"
+
 
 const Home: NextPage = () => {
     return (
-      <h1> hi </h1>
+        <CurrentUserLoading>
+            {/* <UserInfo /> */}
+        </CurrentUserLoading>
     )
 }
 
