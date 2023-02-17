@@ -1,13 +1,13 @@
 import type { NextPage } from 'next'
-import { CurrentUserLoading, UserInfo } from "@components/index"
-
+import { CurrentUserLoader, UserInfo, UserLoader } from "@components/index"
 
 const Home: NextPage = () => {
     return (
-        <CurrentUserLoading>
-            {/* <UserInfo /> */}
-        </CurrentUserLoading>
+        <UserLoader>
+            <UserInfo />
+        </UserLoader>
     )
 }
+
 
 export default Home
