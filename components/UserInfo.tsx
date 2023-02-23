@@ -1,6 +1,7 @@
 import { FunctionComponent, ReactFragment, ReactNode } from "react";
 
 type User  = {
+    id: number;
     name: string;
     age: number;
     hairColor:  string;
@@ -16,7 +17,7 @@ const UserInfo: FunctionComponent<Props> = ({ user }) => {
 
     return user ? (
         <>
-            <h3 className="mt-4 text-3xl font-bold"> {name} </h3>     
+            <h3 className="mt-4 text-3xl font-bold"> {name} </h3>
             <p> Age: {age} years </p>
             <p> Hair Color: {hairColor} </p>
             
