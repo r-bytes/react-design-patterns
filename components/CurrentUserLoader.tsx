@@ -7,8 +7,6 @@ type Props = {
 
 const CurrentUserLoader: FunctionComponent<Props> = ({ children }) => {
     const [user, setUser] = useState(null);
-    // const [products, setProducts] = useState(null);
-    // const [allUsers, setAllUsers] = useState(null);
     
     useEffect(() => {
         (async () => {
@@ -16,25 +14,6 @@ const CurrentUserLoader: FunctionComponent<Props> = ({ children }) => {
             setUser(response.data)
         })()
     }, []);
-
-    // useEffect(() => {
-    //     (async () => {
-    //         const response = await axios.get("/api/products")
-    //         setProducts(response.data)
-    //     })()
-    // }, []);
-
-    // useEffect(() => {
-    //     (async () => {
-    //         const response = await axios.get("/api/users")
-    //         setAllUsers(response.data)
-    //     })()
-    // }, []);
-
-
-    console.log("currentUser", user)
-    // console.log("products", products)
-    // console.log("allUsers", allUsers)
     
     return (
         <>
