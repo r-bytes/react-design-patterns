@@ -1,45 +1,84 @@
 import type { NextPage } from 'next'
-import { CurrentUserLoader, DataSource, ResourceLoader, UserInfo, UserLoader } from "@components/index"
-import ProductInfo from "@components/ProductInfo"
-import axios from "axios"
+import { Modal } from "@components/index"
+import { FunctionComponent, useState } from "react";
+import UncontrolledOnboardingFlow from "@components/UncontrolledOnboardingFlow";
 
 const Home: NextPage = () => {
-    type ServerData = (url: string) => () => Promise<any>
-    type LocalStorageData = (key: string) => () => string | null
-
-    const getServerData: ServerData = (url: string) => async () => {
-        const response = await axios.get(url)
-        return response.data
+    type Props = {
+        message: string;
     }
 
-    const getLocalStorageData: LocalStorageData = (key: string) =>  () => {
-        if (localStorage.getItem(key)) {
-            return localStorage.getItem(key)
-        }
-        return localStorage.setItem(key, key)
+    const Text = ({ message }: Props) => <h1> {message} </h1>
+
+    const [shouldShow, setShouldShow] = useState(false)
+    const buttonStyle = "mx-auto justify-end px-6 py-2.5 bg-cyan-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-cyan-700 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-800 active:shadow-lg transition duration-150 ease-in-out"
+
+    const StepOne = ({ goToNext }) => {
+        return (
+        <>
+            <h1> {"Step one: What is your name?"} </h1>
+            <button 
+                className={buttonStyle} 
+                onClick={() => goToNext({ name: "John Doe" })}
+            >
+                {"Next"}
+            </button>
+        </>
+        )
+    }
+    
+    const StepTwo = ({ goToNext }) => {
+        return (
+            <>
+                <h1> {"Step two: what is your age?"} </h1>
+                <button 
+                    className={buttonStyle} 
+                    onClick={() => goToNext({ age: 100 })}
+                >
+                    {"Next"}
+                </button>
+            </>
+        )
+    }
+    
+    const StepThree = ({ goToNext }) => {
+        return (
+            <>
+                <h1> {"Step three: email user info and close the ticket"} </h1>
+                <button 
+                    className={buttonStyle} 
+                    onClick={() => goToNext({ hairColor: "black" })}
+                >
+                    {"Next"}
+                </button>
+            </> 
+        )
     }
 
-    const Text = ({ message }) => <h1> {message} </h1>
 
     return (
         <>
-            <h1 className="mt-10 text-md font-bold"> Basic ... </h1>
-            <ResourceLoader resourceName="user" resourceUrl="/api/users/1">
-                <UserInfo />
-            </ResourceLoader>
+            <Modal shouldShowModal={shouldShow} onRequestClose={() => setShouldShow(!shouldShow)}>
+                <Text message="This is a modal" />
+            </Modal>
+            <button
+                type="button"
+                className={buttonStyle}
+                onClick={() => setShouldShow(!shouldShow)}
+            >
+                {shouldShow ? "hide modal" : "show modal"}
+            </button>
 
-            <ResourceLoader resourceName="product" resourceUrl="/api/products/1">
-                <ProductInfo />
-            </ResourceLoader>
-            
-            <h1 className="mt-10 text-md font-bold"> One step further... </h1>
-            <DataSource getDataFunc={getServerData("/api/users/1")} resourceName="user">
-                <UserInfo />
-            </DataSource>
-
-            <DataSource getDataFunc={getLocalStorageData("hello from local storage")} resourceName="message">
-                <Text />
-            </DataSource>
+            <UncontrolledOnboardingFlow
+                onFinish={data => {
+                    console.log(data)
+                    alert("Finished onboarding!")
+                }}
+            >
+                <StepOne />
+                <StepTwo />
+                <StepThree />
+            </UncontrolledOnboardingFlow>
         </>
     )
 }

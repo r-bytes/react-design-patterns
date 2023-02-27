@@ -4,7 +4,7 @@ import React, { useState, useEffect, ReactNode, FunctionComponent, ForwardRefRen
 type Props = {
     getDataFunc: () => Promise<any> | any;
     resourceName: string;
-    children: ReactNode;
+    children?: ReactNode | undefined;
 }
 
 const DataSource: FunctionComponent<Props> = ({ getDataFunc = () => {}, resourceName, children }) => {

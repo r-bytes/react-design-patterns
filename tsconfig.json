@@ -23,6 +23,6 @@
         "@images/*": ["public/assets/*"]
     },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/RegularList.jsx", "components/SplitScreen.jsx", "components/ProductInfo.tsx", "components/NumberedList.jsx", "components/Modal.jsx", "components/people/LargePersonListItem.jsx", "components/people/SmallPersonListItem.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/RegularList.jsx", "components/SplitScreen.jsx", "components/ProductInfo.tsx", "components/NumberedList.jsx", "components/Modal.tsx", "components/people/LargePersonListItem.jsx", "components/people/SmallPersonListItem.jsx"],
   "exclude": ["node_modules"]
 }

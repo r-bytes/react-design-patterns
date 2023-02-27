@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, { useState, useEffect, ReactNode, FunctionComponent } from 'react'
+import React, { useState, useEffect, ReactNode, FunctionComponent, cloneElement, isValidElement, ReactElement } from 'react'
 
 type Props = {
     resourceUrl: string;
     resourceName: string;
-    children: ReactNode;
+    children?: ReactNode | undefined;
 }
 
 const ResourceLoader: FunctionComponent<Props> = ({ resourceUrl, resourceName, children }) => {
@@ -19,8 +19,8 @@ const ResourceLoader: FunctionComponent<Props> = ({ resourceUrl, resourceName, c
     return (
         <>
             {React.Children.map(children , child => {
-                if (React.isValidElement(child)) {
-                    return React.cloneElement(child as React.ReactElement<any>, { [resourceName]: state })
+                if (isValidElement(child)) {
+                    return cloneElement(child as ReactElement, { [resourceName]: state })
                 }
 
                 return child;

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect, ReactNode, FunctionComponent } from 'react'
 
 type Props = {
-    children: ReactNode
+    children?: ReactNode | undefined;
 }
 
 const CurrentUserLoader: FunctionComponent<Props> = ({ children }) => {
