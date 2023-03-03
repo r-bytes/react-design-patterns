@@ -1,20 +1,14 @@
 import React, { FunctionComponent } from "react"
+import useResource from "./hooks/useResource";
 
-type Product  = {
-    id: number;
-    name: string;
-    price: string;
-    description: string;
-    rating: number;
+interface Props {
+    productId: any;
 }
 
-type Props = {
-    product: Product
-}
-
-const ProductInfo: FunctionComponent<Props> = ({ product }) => {
-    const { name, price, description, rating } = product || {}
-
+const ProductInfo = ({ productId }: Props) => {
+    const product = useResource(`/api/products/${productId}`)
+    const { name, price, description, rating } = product
+    
     return product ? (
         <>
             <h3 className="mt-4 text-lg font-bold"> {name} </h3>

@@ -1,3 +1,4 @@
+import { users } from "@components/constants/users";
 import { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
@@ -7,26 +8,6 @@ type Data = {
     hairColor: string;
     hobbies: string[];
 } | undefined
-
-let users = [{
-    id: 1,
-	name: 'John Doe',
-	age: 54,
-	hairColor: 'brown',
-	hobbies: ['swimming', 'bicycling', 'video games'],
-}, {
-    id: 2,
-	name: 'Brenda Smith',
-	age: 33,
-	hairColor: 'black',
-	hobbies: ['golf', 'mathematics'],
-}, {
-    id: 3,
-	name: 'Jane Garcia',
-	age: 27,
-	hairColor: 'blonde',
-	hobbies: ['biology', 'medicine', 'gymnastics'],
-}];
 
 export default function handler(
     req: NextApiRequest,
@@ -40,8 +21,7 @@ export default function handler(
         res.status(200).json(requestedUser)
     } else {
         const { user: updatedUser } = req.body;
-    
-        users = users.map(user => user.id === uId ? updatedUser : user);
+        // const requestedUser = users.map(user => user.id === uId ? updatedUser : user);
         res.json(users.find(user => user.id === uId));
     }
 }

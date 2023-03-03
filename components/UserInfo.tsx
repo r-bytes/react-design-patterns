@@ -1,19 +1,28 @@
 import { FunctionComponent, ReactFragment, ReactNode } from "react";
+import useCurrentUser from "./hooks/useCurrentUser";
+import useResource from "./hooks/useResource";
+import axios from "axios";
+import useDataSource from "./hooks/useDataSource";
 
-type User  = {
-    id: number;
-    name: string;
-    age: number;
-    hairColor:  string;
-    hobbies: string[]
+interface Props {
+    userId: number
 }
 
-type Props = {
-    user: User
+const serverResource = (resourceUrl: string) => async () => {
+    const response = await axios.get(resourceUrl);
+    return response.data;
 }
 
-const UserInfo: FunctionComponent<Props> = ({ user }) => {
-    const { name, age, hairColor, hobbies } = user || {};
+const localStorageResource = (key: string) => () => {
+    return localStorage.getItem(key);
+}
+
+const UserInfo = ({ userId }: Props) => {
+    // const user = useResource(`/api/users/${userId}`);
+    const user = useDataSource(serverResource(`/api/users/${userId}`));
+    const message = useDataSource(localStorageResource(`message`));
+    
+    const { name, age, hairColor, hobbies } = user;
 
     return user ? (
         <>
