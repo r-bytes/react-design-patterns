@@ -27,34 +27,16 @@ const Home: NextPage = () => {
         <>
             <h1 className="mt-10 text-md font-bold"> Basic ... </h1>
             <ResourceLoader resourceName="user" resourceUrl="/api/users/1">
-                <UserInfo user={{
-                    id: 0,
-                    name: "",
-                    age: 0,
-                    hairColor: "",
-                    hobbies: []
-                }} />
+                <UserInfo userId={0} />
             </ResourceLoader>
 
             <ResourceLoader resourceName="product" resourceUrl="/api/products/1">
-                <ProductInfo product={{
-                    id: 0,
-                    name: "",
-                    price: "",
-                    description: "",
-                    rating: 0
-                }} />
+                <ProductInfo productId={undefined} />
             </ResourceLoader>
             
             <h1 className="mt-10 text-md font-bold"> One step further... </h1>
             <DataSource getDataFunc={getServerData("/api/users/1")} resourceName="user">
-                <UserInfo user={{
-                    id: 0,
-                    name: "",
-                    age: 0,
-                    hairColor: "",
-                    hobbies: []
-                }} />
+                <UserInfo userId={0} />
             </DataSource>
 
             <DataSource getDataFunc={getLocalStorageData("hello from local storage")} resourceName="message">

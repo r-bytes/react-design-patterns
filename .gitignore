@@ -14,7 +14,7 @@
 
 # production
 /build
-
+sal.js
 # misc
 .DS_Store
 *.pem

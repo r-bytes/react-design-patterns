@@ -17,25 +17,38 @@ const localStorageResource = (key: string) => () => {
     return localStorage.getItem(key);
 }
 
+const isDestructable = (obj: {} | undefined) => {
+    // Check undefined
+    if (obj === undefined) {
+        console.log('This is undefined object, please check again!');
+        return false;
+    }
+
+    return true;
+}
+
 const UserInfo = ({ userId }: Props) => {
     // const user = useResource(`/api/users/${userId}`);
     const user = useDataSource(serverResource(`/api/users/${userId}`));
     const message = useDataSource(localStorageResource(`message`));
-    
-    const { name, age, hairColor, hobbies } = user;
+ 
+    if (isDestructable(user)) {
+        const { name, age, hairColor, hobbies } = user!
+        return user ? (
+            <>
+                <h3 className="mt-4 text-3xl font-bold"> {name} </h3>
+                <p> Age: {age} years </p>
+                <p> Hair Color: {hairColor} </p>
+                
+                <h3 className="mt-4 text-lg font-bold underline"> Hobbies: </h3>
+                <ul>
+                    {hobbies.map((hobby: string) => <li key={hobby}> {hobby} </li>)}
+                </ul>
+            </>
+        ) : <p> Loading... </p>
+    }
+    return null
 
-    return user ? (
-        <>
-            <h3 className="mt-4 text-3xl font-bold"> {name} </h3>
-            <p> Age: {age} years </p>
-            <p> Hair Color: {hairColor} </p>
-            
-            <h3 className="mt-4 text-lg font-bold underline"> Hobbies: </h3>
-            <ul>
-                {hobbies.map((hobby: string) => <li key={hobby}> {hobby} </li>)}
-            </ul>
-        </>
-    ) : <p> Loading... </p>
 }
 
 export default UserInfo
